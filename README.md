@@ -11,7 +11,9 @@ Look no further!
 
 - Print the encoder knob and the ThinkPad holder
 - Upload the Arduino sketch
+- run the the installer `sh install.sh` or
+
 - Adjust the path in pypoti.json to the repo
-- `mkdir -p ~/.mozilla/native-messaging-hosts/`
-- `ln -s /path/to/repo/ext/pypoti.json ~/.mozilla/native-messaging-hosts/`
+- mkdir -p ~/.mozilla/native-messaging-hosts/`
+- ln -s /path/to/repo/ext/pypoti.json ~/.mozilla/native-messaging-hosts/`
 - Load the extension in Firefox about:debugging -> Load temporary add-on
