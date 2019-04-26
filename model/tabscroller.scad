@@ -19,7 +19,7 @@ module main() {
         union() { // positive
             // housing +
             translate([0,0,Body.z/2+Wall])
-                cube(Body + [2,1,1]*Wall, center=true);
+                cube(Body + [1,1,1]*Wall, center=true);
             
             // X220 mount +
             translate([Body.x/2,-10,-1])
@@ -32,7 +32,7 @@ module main() {
         }
         union() { // negative
             // inside -
-            translate([0,-1,0.5]*(Wall+Epsilon)+[0,0,Body.z/2+Wall])
+            translate([-0.5,-1,0.5]*(Wall+Epsilon)+[0,0,Body.z/2+Wall])
                 cube(Body, center=true);
             
             // poti -
@@ -63,8 +63,6 @@ module X220Bezel() {
         ]);
 }
 
-$fn=92;
-
 module knob() {
     ShaftDiam = 6.0 * (6/5.62) + Gap;
     ShaftAcross = 4.5 + Gap/2;
@@ -73,6 +71,7 @@ module knob() {
     KnobBaseDiam = 20;
     notches = 11;
     
+    translate([KnobBaseDiam,0,0])
     difference() {
         union() {
             // Shaft Housing +
@@ -94,10 +93,14 @@ module knob() {
                 rotate([0,0,360*(i+0.5)/notches])
                     translate([KnobBaseDiam/2+0.3,0,-10])
                         rotate([0,-4,0])
-                            cylinder(d1=5, d2=2.6, h=KnobLength*3, center=true);
+                            cylinder(d1=5, d2=2.6, h=KnobLength*3, center=true,$fn=18);
         }
     }
 }
 
-//knob();
-main();
+$fn=64;
+knob();
+
+translate([0,0,Body.x/2])
+rotate([0,-90,0])
+    main();
