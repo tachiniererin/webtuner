@@ -1,0 +1,9 @@
+{
+    "name": "pypoti",
+    "description": "Example host for native messaging",
+    "path": "/path/to/repo/ext/pypoti.py",
+    "type": "stdio",
+    "allowed_extensions": [
+        "webtuner@cursed.ee"
+    ]
+}
