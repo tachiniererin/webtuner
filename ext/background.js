@@ -9,7 +9,7 @@ function tabLeft(tabs) {
             var updating = browser.tabs.update(tabs[i - 1].id, {
                 active: true
             });
-            return
+            return;
         }
     }
 }
@@ -21,7 +21,7 @@ function tabRight(tabs) {
             var updating = browser.tabs.update(tabs[i + 1].id, {
                 active: true
             });
-            return
+            return;
         }
     }
 }
@@ -29,8 +29,6 @@ function tabRight(tabs) {
 var port = browser.runtime.connectNative("pypoti")
 
 port.onMessage.addListener((response) => {
-    console.log("Received: " + response);
-
     var querying = browser.tabs.query({ currentWindow: true });
     if (response == "left") {
         querying.then(tabLeft, onError);
