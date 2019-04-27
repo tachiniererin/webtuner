@@ -1,4 +1,6 @@
-# webtuner
+# WebTuner
+
+![Fully Automated WebTuner logo](https://raw.githubusercontent.com/tachiniererin/webtuner/master/webtuner_logo.png "Fully Automated WebTuner")
 
 Has this ever happened to you? Do you just have too many tabs to scroll through with your mouse?
 Would you like to have a better option and fine-grained control about your scroll speed?
