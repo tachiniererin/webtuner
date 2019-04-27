@@ -29,7 +29,7 @@ function tabRight(tabs) {
 function tabClose(tabs) {
     for (let i = 0; i < tabs.length; i++) {
         const tab = tabs[i];
-        if (tab.active && i < tabs.length - 1) {
+        if (tab.active) {
             browser.tabs.remove(tabs[i].id);
             return;
         }
