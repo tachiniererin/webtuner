@@ -39,9 +39,8 @@ port.onMessage.addListener((response) => {
         querying.then(tabLeft, onError);
     } else if (response == "right") {
         querying.then(tabRight, onError);
-    } else if (response == "close") {
+    } else if (response == "click") {
         querying.then(tabClose, onError);
-    }
 });
 
 port.onDisconnect.addListener((p) => {
