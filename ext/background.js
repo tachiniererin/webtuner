@@ -26,13 +26,14 @@ function tabRight(tabs) {
     }
 }
 
-function closeTab(tabInfo) {
-    browser.tabs.remove(tabInfo.id);
-}
-
 function tabClose(tabs) {
-    var gettingCurrent = browser.tabs.getCurrent();
-    gettingCurrent.then(closeTab, onError);
+    for (let i = 0; i < tabs.length; i++) {
+        const tab = tabs[i];
+        if (tab.active && i < tabs.length - 1) {
+            browser.tabs.remove(tabs[i].id);
+            return;
+        }
+    }
 }
 
 var port = browser.runtime.connectNative("pypoti")
