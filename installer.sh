@@ -1,7 +1,8 @@
 #!/bin/bash
 sed -ibak "s?/path/to/repo?$PWD?" ext/pypoti.json
 mkdir -p ~/.mozilla/native-messaging-hosts/
-ln -s $PWD/ext/pypoti.json ~/.mozilla/native-messaging-hosts/
+ln -sf $PWD/ext/pypoti.json ~/.mozilla/native-messaging-hosts/
+rm -f webtuner.xpi
 cd ext
 zip -r -FS ../webtuner.zip *
 cd ..
