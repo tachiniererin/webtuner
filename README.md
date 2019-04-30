@@ -9,6 +9,8 @@ Look no further!
 
 3D-print yourself a nice knob for your rotary encoder, upload the sketch to an Arduino and get scrolling.
 
+[![Watch the WebTuner in action on YouTube!](https://img.youtube.com/vi/nNiJmV_KFPg/0.jpg)](https://www.youtube.com/watch?v=nNiJmV_KFPg)
+
 ## How to run
 
 - Print the encoder knob and the ThinkPad holder
