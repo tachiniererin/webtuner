@@ -9,7 +9,9 @@ Look no further!
 
 3D-print yourself a nice knob for your rotary encoder, upload the sketch to an Arduino and get scrolling.
 
+Watch the WebTuner in action:  
 [![Watch the WebTuner in action on YouTube!](https://img.youtube.com/vi/nNiJmV_KFPg/0.jpg)](https://www.youtube.com/watch?v=nNiJmV_KFPg)
+or on diode.zone: https://diode.zone/videos/watch/89fa7e87-2f07-4148-9009-f70ae06c8d03
 
 ## How to run
 
