@@ -4,7 +4,6 @@ function onError(error) {
 }
 
 function tabLeft(tabs) {
-    doStore = false;
     for (let i = 0; i < tabs.length; i++) {
         const tab = tabs[i];
         if (tab.active && i > 0) {
@@ -17,7 +16,6 @@ function tabLeft(tabs) {
 }
 
 function tabRight(tabs) {
-    doStore = false;
     for (let i = 0; i < tabs.length; i++) {
         const tab = tabs[i];
         if (tab.active && i < tabs.length - 1) {
@@ -30,7 +28,6 @@ function tabRight(tabs) {
 }
 
 function tabClose(tabs) {
-    doStore = false;
     for (let i = 0; i < tabs.length; i++) {
         const tab = tabs[i];
         if (tab.active) {
@@ -47,29 +44,41 @@ function tabClose(tabs) {
     }
 }
 
-var storedTabs = [-1, -1, -1];
-var doStore = false;
+var storedTabs = [-1, -1, -1, -1];
 
-function storeTab() {
-    doStore = !doStore;
+function storeTab(buttonIndex) {
+    querying = browser.tabs.query({ currentWindow: true, active:true });
+    querying.then(function(result){
+        if (result.length == 1){
+            storedTabs[buttonIndex] = result[0].id;
+        }
+    });
 }
 
 function tabShortcut(buttonIndex) {
-    if (doStore) { // record button was pressed so store this tab
-        doStore = false;
-        querying = browser.tabs.query({ currentWindow: true, active:true });
-        querying.then(function(result){
-            if (result.length == 1){
-                storedTabs[buttonIndex] = result[0].id;
-            }
+    if (storedTabs[buttonIndex] != -1) {
+        var updating = browser.tabs.update(storedTabs[buttonIndex], {
+            active: true
         });
-    } else { // jump to a stored tab (if it exists)
-        if (storedTabs[buttonIndex] != -1) {
-            var updating = browser.tabs.update(storedTabs[buttonIndex], {
-                active: true
-            });
-        }
     }
+}
+
+function restoreMostRecentTab() {
+  var gettingSessions = browser.sessions.getRecentlyClosed({
+    maxResults: 1
+  });
+  gettingSessions.then(function(sessionInfos){
+      if (!sessionInfos.length) {
+        console.log("No sessions found")
+        return;
+      }
+      let sessionInfo = sessionInfos[0];
+      if (sessionInfo.tab) {
+        browser.sessions.restore(sessionInfo.tab.sessionId);
+      } else {
+        browser.sessions.restore(sessionInfo.window.sessionId);
+      }
+  }, onError);
 }
 
 var port = browser.runtime.connectNative("pypoti");
@@ -82,20 +91,35 @@ port.onMessage.addListener((response) => {
     } else if (response == "right") {
         querying.then(tabRight, onError);
 
-    } else if (response == "click") {
+    } else if (response == "click-short") {
         querying.then(tabClose, onError);
 
-    } else if (response == "store") {
-        querying.then(storeTab(), onError);
+    } else if (response == "click-long") {
+        querying.then(restoreMostRecentTab, onError);
 
-    } else if (response == "tab1") {
+    } else if (response == "btn-1-short") {
         querying.then(tabShortcut(0), onError);
 
-    } else if (response == "tab2") {
+    } else if (response == "btn-1-long") {
+        querying.then(storeTab(0), onError);
+
+    } else if (response == "btn-2-short") {
         querying.then(tabShortcut(1), onError);
 
-    } else if (response == "tab3") {
+    } else if (response == "btn-2-long") {
+        querying.then(storeTab(1), onError);
+
+    } else if (response == "btn-3-short") {
         querying.then(tabShortcut(2), onError);
+
+    } else if (response == "btn-3-long") {
+        querying.then(storeTab(2), onError);
+
+    } else if (response == "btn-4-short") {
+        querying.then(tabShortcut(3), onError);
+
+    } else if (response == "btn-4-long") {
+        querying.then(storeTab(3), onError);
     }
 });
 
