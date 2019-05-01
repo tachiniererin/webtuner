@@ -30,7 +30,6 @@ Debouncer debouncer_tab2_btn(TAB2_BTN_PIN, DEBOUNCE_MS);
 Debouncer debouncer_tab3_btn(TAB3_BTN_PIN, DEBOUNCE_MS);
 
 Encoder myEnc(ENC_PIN1, ENC_PIN2);
-boolean sw_state;
 
 void setup() {
   Serial.begin(115200);
