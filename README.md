@@ -17,7 +17,7 @@ or on [diode.zone](https://diode.zone/videos/watch/89fa7e87-2f07-4148-9009-f70ae
 
 - Print the encoder knob and the ThinkPad holder
 - Upload the Arduino sketch
-- run the the installer `sh install.sh` or install manually:
+- run the the installer `sh installer.sh` or install manually:
   - Adjust the path in pypoti.json to match where the repo is
   - `mkdir -p ~/.mozilla/native-messaging-hosts/`
   - `ln -s /path/to/repo/ext/pypoti.json ~/.mozilla/native-messaging-hosts/` or copy it
